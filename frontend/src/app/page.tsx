@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div style={{height: '100vh', textAlign: 'center'}}>
       <h1>Presentation page</h1>
-      <Link href={'/create-menu'} style={{border: '1px solid black'}}>create QR menu</Link>
+      <Link href={'/menus'} style={{border: '1px solid black'}}>create QR menu</Link>
     </div>
   )
 }

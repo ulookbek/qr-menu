@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  frontend:
+    container_name: qr-frontend
+    build: ./frontend
+    restart: always
+    ports:
+      - 3333:3333
+    command: ""
+
+  backend:
+    container_name: qr-backend
+    build: ./backend
+    restart: always
+    ports:
+      - 8888:8888
+    depends_on:
+      - db
+    command: ""
+
+  db:
+    container_name: qr-db
+    build: ./db
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "kjournal"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123123"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: qr-network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.199.1/24
